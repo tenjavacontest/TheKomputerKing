@@ -1,0 +1,5 @@
+name: TenDotJava
+main: net.komputerking.java.tendotjava.Main
+version: 1.0
+description: TheKomputerKing's entry to the ten.java competition
+author: TheKomputerKing
