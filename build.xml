@@ -35,7 +35,7 @@
     	<mkdir dir="${dist}/lib"/>
  
     	<!-- Put everything in ${build} into the {$projectName}-${DSTAMP}.jar file -->
-    	<jar jarfile="${dist}/lib/${label}.jar" classpathref="bukkit.classpath" basedir="${build}">
+    	<jar jarfile="${dist}/lib/${label}.jar" basedir="${build}">
     	</jar>
   </target>
 
