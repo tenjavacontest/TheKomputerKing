@@ -26,6 +26,7 @@
   <target name="compile" depends="init"
   	description="compile the source " >
    	<javac classpathref="bukkit.classpath" srcdir="${src}" destdir="${build}"/>
+   	<copy file="${src}/plugin.yml" tofile="${build}/plugin.yml"/>
   </target>
  
   <target name="dist" depends="compile"
