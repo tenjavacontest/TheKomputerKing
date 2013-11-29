@@ -3,6 +3,6 @@ This is the repository that TheKomputerKing will be working on his ten.java Bukk
 
 You can watch me streaming the development on December the 7th at: [http://twitch.tv/TheKomputerKing](http://twitch.tv/TheKomputerKing)
 
-You can download the latest build at: (http://ci.kompking.info)(ci.kompking.info)
+You can download the latest build at: [http://ci.kompking.info](ci.kompking.info)
 
 -Komp :)
