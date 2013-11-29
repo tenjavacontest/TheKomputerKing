@@ -11,6 +11,10 @@
   <property name="webcontent"  location="WebContent"/>
   <property environment="env"/>
   <property name="label" value="${projectName}-${env.BUILD_NUMBER}"/>
+  
+    <path id="bukkit.classpath">  
+    <pathelement path="lib/bukkit.jar"/>  
+  </path> 
  
   <target name="init">
     	<!-- Create the time stamp -->
@@ -31,12 +35,7 @@
     	<mkdir dir="${dist}/lib"/>
  
     	<!-- Put everything in ${build} into the {$projectName}-${DSTAMP}.jar file -->
-    	<jar jarfile="${dist}/lib/${label}.jar" basedir="${build}">
-    	<classpath>
-
-       <pathelement location="lib/bukkit.jar"/>
-
-   </classpath>
+    	<jar jarfile="${dist}/lib/${label}.jar" classpathref="bukkit.classpath" basedir="${build}">
     	</jar>
   </target>
 
