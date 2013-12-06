@@ -5,4 +5,6 @@ You can watch me streaming the development on December the 7th at: [http://twitc
 
 You can download the latest build at: [ci.kompking.info](http://ci.kompking.info/)
 
+I will be taking part in the contest at 16:00 UTC
+
 -Komp :)
