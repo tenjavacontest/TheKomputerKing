@@ -42,6 +42,9 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        if (lastChest.getBlock().getType().equals(Material.CHEST)){
+            lastChest.getBlock().setType(Material.AIR);
+        }
     }
 
     /**
