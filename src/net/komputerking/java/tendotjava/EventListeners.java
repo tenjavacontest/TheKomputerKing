@@ -10,7 +10,7 @@ public class EventListeners implements Listener{
     
     @EventHandler
     public void onEntityClick(PlayerInteractEntityEvent event){
-        if (!Main.isPlayerInGame(event.getPlayer()) && event.getRightClicked() instanceof Creature){
+        if (Main.isPlayerInGame(event.getPlayer()) && event.getRightClicked() instanceof Creature){
             event.getPlayer().setPassenger(event.getRightClicked());
         }
     }
