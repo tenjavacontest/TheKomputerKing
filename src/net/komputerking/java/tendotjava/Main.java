@@ -61,7 +61,7 @@ public class Main extends JavaPlugin {
         CrateTNT c5 = new CrateTNT();
         CrateSilverfish c6 = new CrateSilverfish();
         CratePotion c7 = new CratePotion();
-        CratePartyGiant c8 = new CratePartyGiant();
+        CratePartyGiant c8 = new CratePartyGiant(this);
     }
 
     /**

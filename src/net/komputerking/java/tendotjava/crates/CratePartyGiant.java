@@ -2,7 +2,9 @@ package net.komputerking.java.tendotjava.crates;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import net.komputerking.java.tendotjava.Main;
 import net.komputerking.java.tendotjava.api.Crate;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -12,19 +14,22 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class CratePartyGiant extends Crate {
+    
+    private Main pl;
 
-    public CratePartyGiant() {
+    public CratePartyGiant(Main par1) {
         this.setGood(true);
         EntityCrates.registerCrate(this);
+        pl = par1;
     }
 
     @Override
     public void onActivate(final Location l, Player p) {
         final Giant g = (Giant) l.getWorld().spawnEntity(l, EntityType.GIANT);
-        Timer t = new Timer();
-        t.schedule(new TimerTask(){
+        Bukkit.getScheduler().scheduleSyncDelayedTask(pl, new Runnable(){
             public void run(){
-                g.remove();
+                g.damage(1D);
+                g.setHealth(0);
                 int y = (int) Math.ceil(g.getLocation().getBlockY());
                 while (y != y+19){
                     y++;
@@ -33,7 +38,7 @@ public class CratePartyGiant extends Crate {
                     Item i = (Item) l.getWorld().dropItemNaturally(l, new ItemStack(Material.IRON_INGOT, 1));
                 }
             }
-        }, 700);
+        }, 30);
     }
 
 }
