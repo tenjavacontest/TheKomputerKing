@@ -63,6 +63,15 @@ public class Main extends JavaPlugin {
                     }
                 }
             }, 120L);
+           Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
+                public void run() {
+                    if (!found){
+                        lastChest.getWorld().createExplosion(lastChest, 0);
+                        lastChest.getBlock().setType(Material.AIR);
+                        Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " The crate self-destructed as nobody found it.");
+                    }
+                }
+            }, 6*60*20L);
         }
         }
     }
