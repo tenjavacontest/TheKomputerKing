@@ -4,17 +4,19 @@ package net.komputerking.java.tendotjava;
 import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Color;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Sheep;
 import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 public class EventListeners implements Listener {
 
@@ -32,16 +34,29 @@ public class EventListeners implements Listener {
             event.getClickedBlock().setType(Material.AIR);
             Random rand = new Random();
             Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " " + event.getPlayer().getName() + ChatColor.GREEN + " has found a crate.");
-            Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " Better luck next time!");
+            for (Player p : Bukkit.getOnlinePlayers()){
+                if (p != event.getPlayer()){
+                    p.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " Better luck next time!");
+                }
+            }
             if (rand.nextInt(3) == 1) {
                 // Something Nice
                 int seedOfEntity = rand.nextInt(2);
+                if (seedOfEntity == 1) {
+                    Item i = (Item) event.getClickedBlock().getLocation().getWorld().spawnEntity(event.getClickedBlock().getLocation(), EntityType.DROPPED_ITEM);
+                    i.setItemStack(new ItemStack(Material.DIAMOND, 3));
+                    i.setVelocity(new Vector(0, 0.25, 0));
+                }
+                if (seedOfEntity == 0){
+                    org.bukkit.entity.Player p = (org.bukkit.entity.Player) event.getClickedBlock().getLocation().getWorld().spawnEntity(event.getClickedBlock().getLocation(), EntityType.PLAYER);
+                    p.setCustomName("Notch");
+                    p.setCustomNameVisible(true);
+                }
                 event.getPlayer().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.GREEN + " You have found a good crate.");
             } else {
                 // Something Not Nice
                 event.getPlayer().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " You have found a bad crate.");
                 int seedOfEntity = rand.nextInt(3);
-                Bukkit.broadcastMessage("ID: " + seedOfEntity);
                 if (seedOfEntity == 1) {
                     int amount = 0;
                     while (amount != 80) {
@@ -51,7 +66,8 @@ public class EventListeners implements Listener {
                 }
                 if (seedOfEntity == 0) {
                         TNTPrimed t = (TNTPrimed) event.getClickedBlock().getLocation().getWorld().spawnEntity(event.getClickedBlock().getLocation(), EntityType.PRIMED_TNT);
-                        t.setFuseTicks(20);
+                        t.setVelocity(new Vector(0, 0.25, 0));
+                        t.setFuseTicks(10);
                 }
                 if (seedOfEntity == 2){
                     int amount = 0;
