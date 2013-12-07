@@ -9,6 +9,9 @@ import org.bukkit.entity.FallingBlock;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin{
+    
+    public boolean found = false;
+    public Location lastChest = null;
    
     @Override
     public void onEnable(){
@@ -30,14 +33,17 @@ public class Main extends JavaPlugin{
     }
     
     public void dropCrate(){
+        if (found){
         Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.WHITE + " A crate is dropping at the co-ordinates 0, 0!");
         Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.WHITE + " Get there to pick it up.");
         final Location loc = new Location(Bukkit.getWorld("world"), 0, 255 ,0);
+        lastChest = loc;
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
             public void run(){
               FallingBlock fb = Bukkit.getWorld("world").spawnFallingBlock(loc, Material.CHEST, (byte) 0x0);
             }
         },120L);
+        }
     }
 
 }
