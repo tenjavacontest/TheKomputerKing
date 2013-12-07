@@ -114,11 +114,11 @@ public class EventListeners implements Listener {
                 }
                 if (seedOfEntity == 2) {
                     int amount = 0;
-                    while (amount != 80) {
+                    while (amount != 100) {
                         Sheep s = (Sheep) event.getClickedBlock().getLocation().getWorld().spawnEntity(event.getClickedBlock().getLocation(), EntityType.SHEEP);
                         int colorSeed = rand.nextInt(DyeColor.values().length);
                         s.setColor(DyeColor.values()[colorSeed]);
-                        Vector velocity = new Vector(rand.nextInt(2), 0.3, rand.nextInt(2));
+                        Vector velocity = new Vector(rand.nextInt(2), 0.8, rand.nextInt(2));
                         s.setVelocity(velocity);
                         amount++;
                     }
