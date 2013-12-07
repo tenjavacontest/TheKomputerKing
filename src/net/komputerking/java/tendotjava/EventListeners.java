@@ -4,8 +4,11 @@ package net.komputerking.java.tendotjava;
 import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Sheep;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -28,21 +31,28 @@ public class EventListeners implements Listener {
             Random rand = new Random();
             Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " " + event.getPlayer().getName() + ChatColor.GREEN + " has found a crate.");
             Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " Better luck next time!");
-            if (rand.nextBoolean()) {
+            if (rand.nextInt(4) == 1 || rand.nextInt(4) == 2) {
                 // Something Nice
-                // int seedOfEntity = rand.nextInt(2);
-                int seedOfEntity = 1;
+                int seedOfEntity = rand.nextInt(2);
                 event.getPlayer().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.GREEN + " You have found a good crate.");
             } else {
                 // Something Not Nice
                 event.getPlayer().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " You have found a bad crate.");
-                // int seedOfEntity = rand.nextInt(2);
-                int seedOfEntity = 1;
+                int seedOfEntity = rand.nextInt(2);
                 if (seedOfEntity == 1) {
                     int amount = 0;
-                    while (amount != 40){
-                    event.getClickedBlock().getLocation().getWorld().spawnEntity(event.getClickedBlock().getLocation(), EntityType.BAT);
-                    amount++;
+                    while (amount != 80) {
+                        event.getClickedBlock().getLocation().getWorld().spawnEntity(event.getClickedBlock().getLocation(), EntityType.BAT);
+                        amount++;
+                    }
+                }
+                if (seedOfEntity == 2) {
+                    int amount = 0;
+                    while (amount != 60) {
+                        Sheep s = (Sheep) event.getClickedBlock().getLocation().getWorld().spawnEntity(event.getClickedBlock().getLocation(), EntityType.SHEEP);
+                        int colorSeed = rand.nextInt(DyeColor.values().length);
+                        s.setColor(DyeColor.values()[colorSeed]);
+                        amount++;
                     }
                 }
             }
