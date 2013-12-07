@@ -48,7 +48,7 @@ public class EventListeners implements Listener {
     }
 
     @EventHandler
-    public void onClick(PlayerInteractEvent event) throws InvocationTargetException, NoSuchFieldException {
+    public void onClick(PlayerInteractEvent event) throws InvocationTargetException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
         if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && event.getClickedBlock().getLocation().equals(pl.lastChest) && !pl.found) {
             pl.found = true;
             event.setCancelled(true);
