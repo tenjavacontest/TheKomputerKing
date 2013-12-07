@@ -1,10 +1,13 @@
 
 package net.komputerking.java.tendotjava;
 
+import java.util.Random;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -34,11 +37,14 @@ public class Main extends JavaPlugin{
     
     public void dropCrate(){
         if (found){
+        Random rand = new Random();
         found = false;
-        Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.WHITE + " A crate is dropping at the co-ordinates 0, 0!");
+        final World w = Bukkit.getWorld("world");
+        int chunkSeed = rand.nextInt(w.getLoadedChunks().length);
+        Chunk c = w.getLoadedChunks()[chunkSeed];
+        final Location loc = new Location(w, c.getX(), 255, c.getZ());
+        Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.WHITE + " A crate is dropping at the highest point at " + loc.getX() + ", " + loc.getZ());
         Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.WHITE + " Get there to pick it up.");
-        final Location loc = new Location(Bukkit.getWorld("world"), 0, 255 ,0);
-        lastChest = loc;
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
             public void run(){
               FallingBlock fb = Bukkit.getWorld("world").spawnFallingBlock(loc, Material.CHEST, (byte) 0x0);
