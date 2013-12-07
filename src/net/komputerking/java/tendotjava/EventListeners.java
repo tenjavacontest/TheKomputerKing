@@ -10,6 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Sheep;
+import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -32,7 +33,7 @@ public class EventListeners implements Listener {
             Random rand = new Random();
             Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " " + event.getPlayer().getName() + ChatColor.GREEN + " has found a crate.");
             Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " Better luck next time!");
-            if (rand.nextInt(4) == 1 || rand.nextInt(4) == 2) {
+            if (rand.nextInt(3) == 1) {
                 // Something Nice
                 int seedOfEntity = rand.nextInt(2);
                 event.getPlayer().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.GREEN + " You have found a good crate.");
@@ -48,13 +49,8 @@ public class EventListeners implements Listener {
                     }
                 }
                 if (seedOfEntity == 2) {
-                    int amount = 0;
-                    while (amount != 60) {
-                        Sheep s = (Sheep) event.getClickedBlock().getLocation().getWorld().spawnEntity(event.getClickedBlock().getLocation(), EntityType.SHEEP);
-                        int colorSeed = rand.nextInt(DyeColor.values().length);
-                        s.setColor(DyeColor.values()[colorSeed]);
-                        amount++;
-                    }
+                        TNTPrimed t = (TNTPrimed) event.getClickedBlock().getLocation().getWorld().spawnEntity(event.getClickedBlock().getLocation(), EntityType.PRIMED_TNT);
+                        t.setFuseTicks(20);
                 }
             }
         }
