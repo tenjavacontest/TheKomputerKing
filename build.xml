@@ -10,7 +10,7 @@
   <property name="dist"  location="dist"/>
   <property name="webcontent"  location="WebContent"/>
   <property environment="env"/>
-  <property name="label" value="${projectName}-${env.BUILD_NUMBER}"/>
+  <property name="label" value="${projectName}"/>
   
     <path id="bukkit.classpath">  
     <pathelement path="lib/bukkit.jar"/>  
