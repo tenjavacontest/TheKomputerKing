@@ -7,7 +7,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.Vector;
 
 public class Main extends JavaPlugin{
    
@@ -34,8 +33,11 @@ public class Main extends JavaPlugin{
         Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.WHITE + " A crate is dropping at the co-ordinates 0, 0!");
         Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.WHITE + " Get there to pick it up.");
         Location loc = new Location(Bukkit.getWorld("world"), 0, 255 ,0);
-        FallingBlock fb = Bukkit.getWorld("world").spawnFallingBlock(loc, Material.CHEST, (byte) 0x0);
-        fb.setVelocity(new Vector(0, 0.02, 0));
+        Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
+            public void run(){
+              FallingBlock fb = Bukkit.getWorld("world").spawnFallingBlock(loc, Material.PISTON_EXTENSION, (byte) 0x0);
+            }
+        },120L);
     }
 
 }
