@@ -7,6 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Horse;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Sheep;
@@ -48,9 +49,10 @@ public class EventListeners implements Listener {
                     i.setVelocity(new Vector(0, 0.25, 0));
                 }
                 if (seedOfEntity == 0){
-                    org.bukkit.entity.Player p = (org.bukkit.entity.Player) event.getClickedBlock().getLocation().getWorld().spawnEntity(event.getClickedBlock().getLocation(), EntityType.PLAYER);
-                    p.setCustomName("Notch");
-                    p.setCustomNameVisible(true);
+                   Horse h = (Horse) event.getClickedBlock().getLocation().getWorld().spawnEntity(event.getClickedBlock().getLocation(), EntityType.HORSE);
+                   h.setAdult();
+                   h.setTamed(true);
+                   h.setDomestication(1);
                 }
                 event.getPlayer().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.GREEN + " You have found a good crate.");
             } else {
