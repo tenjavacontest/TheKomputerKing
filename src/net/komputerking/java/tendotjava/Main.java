@@ -43,7 +43,7 @@ public class Main extends JavaPlugin{
         int chunkSeed = rand.nextInt(w.getLoadedChunks().length);
         Chunk c = w.getLoadedChunks()[chunkSeed];
         final Location loc = new Location(w, c.getX(), 255, c.getZ());
-        Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.WHITE + " A crate is dropping at the highest point at " + loc.getX() + ", " + loc.getZ());
+        Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.WHITE + " A crate is dropping at the highest point at " + Math.ceil(loc.getX()) + ", " + Math.ceil(loc.getZ()));
         Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.WHITE + " Get there to pick it up.");
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
             public void run(){
