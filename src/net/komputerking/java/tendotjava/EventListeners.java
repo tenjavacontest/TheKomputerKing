@@ -84,8 +84,10 @@ public class EventListeners implements Listener {
                 }
                 if (good){
                     event.getPlayer().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.GREEN + " You found a good crate!");
+                    NMS.doFirework(event.getClickedBlock().getLocation(), getFW(true));
                 } else {
                     event.getPlayer().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " You found a bad crate!");
+                    NMS.doFirework(event.getClickedBlock().getLocation(), getFW(false));
                 }
             }
         }
