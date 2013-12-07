@@ -28,7 +28,7 @@ public class Main extends JavaPlugin{
             public void run(){
                 dropCrate();
             }
-        }, 0L, 4000L);
+        }, 0L, 10000L);
     }
     
     @Override
