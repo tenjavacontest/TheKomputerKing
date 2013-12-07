@@ -8,6 +8,7 @@ import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -52,6 +53,10 @@ public class Main extends JavaPlugin{
             public void run(){
               FallingBlock fb = Bukkit.getWorld("world").spawnFallingBlock(loc, Material.CHEST, (byte) 0x0);
               lastChest = fb.getLocation().getWorld().getHighestBlockAt(fb.getLocation()).getLocation();
+              lastChest.getBlock().setType(Material.AIR);
+              if (lastChest.getBlock().getRelative(BlockFace.DOWN).getType().equals(Material.AIR)){
+                  lastChest.getBlock().getRelative(BlockFace.DOWN).setType(Material.GRASS);
+              }
             }
         },120L);
         }
