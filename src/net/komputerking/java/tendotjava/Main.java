@@ -41,13 +41,7 @@ public class Main extends JavaPlugin{
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
             public void run(){
               FallingBlock fb = Bukkit.getWorld("world").spawnFallingBlock(loc, Material.CHEST, (byte) 0x0);
-              boolean hasDetectedFall = false;
-              while(!hasDetectedFall){
-                  if (fb.isOnGround()){
-                      hasDetectedFall = true;
-                      lastChest = fb.getLocation();
-                  }
-              }
+              lastChest = fb.getLocation().getWorld().getHighestBlockAt(fb.getLocation()).getLocation();
             }
         },120L);
         }
