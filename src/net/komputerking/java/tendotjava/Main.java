@@ -4,7 +4,9 @@ import java.util.Random;
 import net.komputerking.java.tendotjava.crates.CrateBat;
 import net.komputerking.java.tendotjava.crates.CrateDiamond;
 import net.komputerking.java.tendotjava.crates.CrateHorse;
+import net.komputerking.java.tendotjava.crates.CratePotion;
 import net.komputerking.java.tendotjava.crates.CrateSheep;
+import net.komputerking.java.tendotjava.crates.CrateSilverfish;
 import net.komputerking.java.tendotjava.crates.CrateTNT;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -46,37 +48,41 @@ public class Main extends JavaPlugin {
             }
         }, 0L, 10000L);
     }
-    
+
     /**
      * Activates the default crates.
      */
-    public void activateCrates(){
+    public void activateCrates() {
         CrateHorse c1 = new CrateHorse();
         CrateDiamond c2 = new CrateDiamond();
         CrateBat c3 = new CrateBat();
         CrateSheep c4 = new CrateSheep();
         CrateTNT c5 = new CrateTNT();
+        CrateSilverfish c6 = new CrateSilverfish();
+        CratePotion c7 = new CratePotion();
     }
-    
+
     /**
      * Gets the instance of the DataManager.
+     *
      * @return Data
      */
-    public static Data getData(){
+    public static Data getData() {
         return data;
     }
-    
+
     /**
      * Gets the instance of the DataManager non-statically.
+     *
      * @return Data
      */
-    public Data getDataInst(){
+    public Data getDataInst() {
         return data;
     }
 
     @Override
     public void onDisable() {
-        if (lastChest.getBlock().getType().equals(Material.CHEST)){
+        if (lastChest.getBlock().getType().equals(Material.CHEST)) {
             lastChest.getBlock().setType(Material.AIR);
         }
     }
@@ -121,9 +127,9 @@ public class Main extends JavaPlugin {
                                 fm.addEffect(fe);
                                 fm.setPower(1);
                                 fw.setFireworkMeta(fm);
-                                Bukkit.getScheduler().cancelTask(count);
                                 countdown = 4 * 60;
                                 count = 0;
+                                Bukkit.getScheduler().cancelTask(count);
                             }
                             if (countdown == 1) {
                                 FireworkEffect fe = FireworkEffect.builder().withColor(Color.RED).with(FireworkEffect.Type.BALL_LARGE).build();

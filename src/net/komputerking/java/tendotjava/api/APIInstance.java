@@ -6,6 +6,10 @@ import net.komputerking.java.tendotjava.Main;
 
 public class APIInstance {
     
+    /**
+     * Registers a crate into the plugin.
+     * @param c 
+     */
     public void registerCrate(Crate c){
         Data d = Main.getData();
         if (!d.doesExist(c)){
@@ -13,6 +17,10 @@ public class APIInstance {
         }
     }
     
+    /**
+     * Unregisters a crate from the plugin.
+     * @param c 
+     */
     public void unregisterCrate(Crate c){
         Data d = Main.getData();
         if (d.doesExist(c)){
