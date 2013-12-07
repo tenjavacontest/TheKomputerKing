@@ -38,18 +38,11 @@ public class EventListeners implements Listener{
         if (event.getEntity() instanceof Player){
             Player p = (Player) event.getEntity();
             if (Main.isPlayerInGame(p)){
-            Entity lastIterated = p;
-            boolean stillInProg = true;
-            while(stillInProg){
-                if (lastIterated.getPassenger() != null){
-                    if (lastIterated != p){
-                    lastIterated.remove();
-                    }
-                    lastIterated = lastIterated.getPassenger();
-                } else {
-                    stillInProg = false;
+                Entity lastPassenger = p.getPassenger();
+                while(p.getPassenger() != null){
+                    lastPassenger = lastPassenger.getPassenger();
+                    lastPassenger.remove();
                 }
-            }
             }
         }
     }
