@@ -20,11 +20,8 @@ public class CratePotion extends Crate {
         Location toSpawn = new Location(l.getWorld(), l.getX(), l.getY() + 3, l.getZ());
         Potion pot = (Potion) l.getWorld().spawnEntity(toSpawn, EntityType.SPLASH_POTION);
         pot.setSplash(true);
-        if (new Random().nextBoolean()) {
-            pot.setType(PotionType.INSTANT_DAMAGE);
-        } else {
-            pot.setType(PotionType.POISON);
-        }
+        pot.setType(PotionType.INSTANT_DAMAGE);
+        p.damage(2D);
         pot.setLevel(2);
     }
 
