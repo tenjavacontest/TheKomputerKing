@@ -35,10 +35,7 @@ public class Main extends JavaPlugin{
         Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.WHITE + " Get there to pick it up.");
         Location loc = new Location(Bukkit.getWorld("world"), 0, 255 ,0);
         FallingBlock fb = Bukkit.getWorld("world").spawnFallingBlock(loc, Material.CHEST, (byte) 0x0);
-        while (!fb.isOnGround()){
-            Vector speedToSet = new Vector(0, 0.2, 0);
-            fb.setVelocity(speedToSet);
-        }
+        fb.setVelocity(new Vector(0, 0.02, 0));
     }
 
 }
