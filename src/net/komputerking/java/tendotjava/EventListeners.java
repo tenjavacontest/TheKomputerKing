@@ -40,7 +40,7 @@ public class EventListeners implements Listener {
                     p.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " Better luck next time!");
                 }
             }
-            if (rand.nextInt(3) == 1) {
+            if (rand.nextInt(2) == 1) {
                 // Something Nice
                 int seedOfEntity = rand.nextInt(2);
                 if (seedOfEntity == 1) {
