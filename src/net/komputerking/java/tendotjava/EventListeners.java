@@ -48,7 +48,7 @@ public class EventListeners implements Listener {
     }
 
     @EventHandler
-    public void onClick(PlayerInteractEvent event) {
+    public void onClick(PlayerInteractEvent event) throws IllegalAccessException, InvocationTargetException {
         if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && event.getClickedBlock().getLocation().equals(pl.lastChest) && !pl.found) {
             pl.found = true;
             event.setCancelled(true);
@@ -62,11 +62,7 @@ public class EventListeners implements Listener {
             }
             if (rand.nextInt(2) == 1) {
                 // Something Nice
-                try {
-                    NMS.doFirework(event.getClickedBlock().getLocation(), getFW(true));
-                } catch (IllegalAccessException | InvocationTargetException ex) {
-                    Logger.getLogger(EventListeners.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                NMS.doFirework(event.getClickedBlock().getLocation(), getFW(true));
                 int seedOfEntity = rand.nextInt(2);
                 if (seedOfEntity == 1) {
                     Item i = (Item) event.getClickedBlock().getLocation().getWorld().dropItemNaturally(event.getClickedBlock().getLocation(), new ItemStack(Material.DIAMOND, 3));
@@ -82,11 +78,7 @@ public class EventListeners implements Listener {
                 event.getPlayer().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.GREEN + " You have found a good crate.");
             } else {
                 // Something Not Nice
-                try {
-                    NMS.doFirework(event.getClickedBlock().getLocation(), getFW(false));
-                } catch (IllegalAccessException | InvocationTargetException ex) {
-                    Logger.getLogger(EventListeners.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                NMS.doFirework(event.getClickedBlock().getLocation(), getFW(false));
                 event.getPlayer().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " You have found a bad crate.");
                 int seedOfEntity = rand.nextInt(3);
                 if (seedOfEntity == 1) {
