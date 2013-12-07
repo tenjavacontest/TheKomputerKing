@@ -1,14 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package net.komputerking.java.tendotjava;
 
-/**
- *
- * @author Kailan
- */
-public class EventListeners {
+import org.bukkit.entity.Creature;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
+
+public class EventListeners implements Listener{
+    
+    @EventHandler
+    public void onEntityClick(PlayerInteractEntityEvent event){
+        if (!Main.isPlayerInGame(event.getPlayer()) && event.getRightClicked() instanceof Creature){
+            event.getPlayer().setPassenger(event.getRightClicked());
+        }
+    }
     
 }
