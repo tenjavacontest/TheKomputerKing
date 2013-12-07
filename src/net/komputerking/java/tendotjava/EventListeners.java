@@ -23,6 +23,10 @@ public class EventListeners implements Listener {
 
     public Main pl;
 
+    /**
+     * Constructor for the EventListener class.
+     * @param pl - Instance of Main class
+     */
     public EventListeners(Main pl) {
         this.pl = pl;
     }
@@ -52,6 +56,7 @@ public class EventListeners implements Listener {
                    h.setAdult();
                    h.setTamed(true);
                    h.setDomestication(1);
+                   h.getInventory().setSaddle(new ItemStack(Material.SADDLE));
                 }
                 event.getPlayer().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.GREEN + " You have found a good crate.");
             } else {
