@@ -44,8 +44,7 @@ public class EventListeners implements Listener {
                 // Something Nice
                 int seedOfEntity = rand.nextInt(2);
                 if (seedOfEntity == 1) {
-                    Item i = (Item) event.getClickedBlock().getLocation().getWorld().spawnEntity(event.getClickedBlock().getLocation(), EntityType.DROPPED_ITEM);
-                    i.setItemStack(new ItemStack(Material.DIAMOND, 3));
+                    Item i = (Item) event.getClickedBlock().getLocation().getWorld().dropItemNaturally(event.getClickedBlock().getLocation(), new ItemStack(Material.DIAMOND, 3));
                     i.setVelocity(new Vector(0, 0.25, 0));
                 }
                 if (seedOfEntity == 0){
