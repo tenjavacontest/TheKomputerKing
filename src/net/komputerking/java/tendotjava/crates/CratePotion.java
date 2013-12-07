@@ -2,12 +2,9 @@ package net.komputerking.java.tendotjava.crates;
 
 import net.komputerking.java.tendotjava.api.Crate;
 import org.bukkit.Location;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.potion.PotionType;
 
 public class CratePotion extends Crate {
 
