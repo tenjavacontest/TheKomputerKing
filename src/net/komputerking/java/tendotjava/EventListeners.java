@@ -118,8 +118,8 @@ public class EventListeners implements Listener {
                         Sheep s = (Sheep) event.getClickedBlock().getLocation().getWorld().spawnEntity(event.getClickedBlock().getLocation(), EntityType.SHEEP);
                         int colorSeed = rand.nextInt(DyeColor.values().length);
                         s.setColor(DyeColor.values()[colorSeed]);
-                        Vector velocity = new Vector(rand.nextInt(2), 0.8, rand.nextInt(2));
-                        s.setVelocity(velocity);
+                        Vector velocity = new Vector(0.3, 0.9, 0.3);
+                        s.setVelocity(s.getVelocity().add(velocity));
                         amount++;
                     }
                 }
