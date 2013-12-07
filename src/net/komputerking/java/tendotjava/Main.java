@@ -17,7 +17,7 @@ public class Main extends JavaPlugin{
         System.out.println("By TheKomputerKing");
         System.out.println("Theme - Entitites");
         System.out.println("======================================");
-        Bukkit.getPluginManager().registerEvents(new EventListeners(), this);
+        Bukkit.getPluginManager().registerEvents(new EventListeners(this), this);
     }
     
     @Override
