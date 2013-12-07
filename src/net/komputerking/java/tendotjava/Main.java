@@ -35,7 +35,7 @@ public class Main extends JavaPlugin{
         final Location loc = new Location(Bukkit.getWorld("world"), 0, 255 ,0);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
             public void run(){
-              FallingBlock fb = Bukkit.getWorld("world").spawnFallingBlock(loc, Material.PISTON_EXTENSION, (byte) 0x0);
+              FallingBlock fb = Bukkit.getWorld("world").spawnFallingBlock(loc, Material.CHEST, (byte) 0x0);
             }
         },120L);
     }
