@@ -22,7 +22,7 @@ public class Main extends JavaPlugin {
 
     public boolean found = true;
     public Location lastChest = null;
-    public int countdown = 6 * 60;
+    public int countdown = 4 * 60;
     public int count;
 
     @Override
@@ -82,22 +82,23 @@ public class Main extends JavaPlugin {
                                 Firework fw = (Firework) lastChest.getWorld().spawnEntity(lastChest, EntityType.FIREWORK);
                                 FireworkMeta fm = fw.getFireworkMeta();
                                 fm.addEffect(fe);
-                                fm.setPower(2);
+                                fm.setPower(1);
                                 fw.setFireworkMeta(fm);
                                 Bukkit.getScheduler().cancelTask(count);
+                                countdown = 4 * 60;
                             }
                             if (countdown == 1) {
                                 FireworkEffect fe = FireworkEffect.builder().withColor(Color.RED).with(FireworkEffect.Type.BALL_LARGE).build();
                                 Firework fw = (Firework) lastChest.getWorld().spawnEntity(lastChest, EntityType.FIREWORK);
                                 FireworkMeta fm = fw.getFireworkMeta();
                                 fm.addEffect(fe);
-                                fm.setPower(2);
+                                fm.setPower(1);
                                 fw.setFireworkMeta(fm);
                             }
                             if (countdown < 6 && countdown != 0) {
                                 Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " The crate will detonate in " + countdown + " seconds.");
                             }
-                            if (countdown == 30) {
+                            if (countdown == 30 || countdown == 60 || countdown == 10) {
                                 Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " The crate will detonate in " + countdown + " seconds.");
                             }
                         }
