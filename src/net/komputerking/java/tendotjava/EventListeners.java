@@ -62,6 +62,11 @@ public class EventListeners implements Listener {
             }
             if (rand.nextInt(2) == 1) {
                 // Something Nice
+                try {
+                    NMS.doFirework(event.getClickedBlock().getLocation(), getFW(true));
+                } catch (IllegalAccessException | InvocationTargetException ex) {
+                    Logger.getLogger(EventListeners.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 int seedOfEntity = rand.nextInt(2);
                 if (seedOfEntity == 1) {
                     Item i = (Item) event.getClickedBlock().getLocation().getWorld().dropItemNaturally(event.getClickedBlock().getLocation(), new ItemStack(Material.DIAMOND, 3));
@@ -74,21 +79,12 @@ public class EventListeners implements Listener {
                     h.setDomestication(1);
                     h.getInventory().setSaddle(new ItemStack(Material.SADDLE));
                 }
-                try {
-                    NMS.doFirework(event.getClickedBlock().getLocation(), getFW(true));
-                } catch (IllegalAccessException ex) {
-                    Logger.getLogger(EventListeners.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InvocationTargetException ex) {
-                    Logger.getLogger(EventListeners.class.getName()).log(Level.SEVERE, null, ex);
-                }
                 event.getPlayer().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.GREEN + " You have found a good crate.");
             } else {
                 // Something Not Nice
                 try {
                     NMS.doFirework(event.getClickedBlock().getLocation(), getFW(false));
-                } catch (IllegalAccessException ex) {
-                    Logger.getLogger(EventListeners.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InvocationTargetException ex) {
+                } catch (IllegalAccessException | InvocationTargetException ex) {
                     Logger.getLogger(EventListeners.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 event.getPlayer().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " You have found a bad crate.");
