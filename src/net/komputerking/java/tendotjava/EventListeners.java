@@ -19,9 +19,10 @@ public class EventListeners implements Listener{
     
     @EventHandler
     public void onClick(PlayerInteractEvent event){
-        if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && event.getClickedBlock().getLocation().equals(pl.lastChest)){
+        if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && event.getClickedBlock().getLocation().equals(pl.lastChest) && !pl.found){
             pl.found = true;
             event.setCancelled(true);
+            event.getClickedBlock().setType(Material.AIR);
             Random rand = new Random();
             Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " " + event.getPlayer().getName() + ChatColor.GREEN + " has found a crate. Better luck next time!");
             if (rand.nextBoolean()){
