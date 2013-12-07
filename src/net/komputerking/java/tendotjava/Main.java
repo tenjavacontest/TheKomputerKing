@@ -4,7 +4,6 @@ import java.util.Random;
 import net.komputerking.java.tendotjava.crates.CrateBat;
 import net.komputerking.java.tendotjava.crates.CrateDiamond;
 import net.komputerking.java.tendotjava.crates.CrateHorse;
-import net.komputerking.java.tendotjava.crates.CratePartyGiant;
 import net.komputerking.java.tendotjava.crates.CratePotion;
 import net.komputerking.java.tendotjava.crates.CrateSheep;
 import net.komputerking.java.tendotjava.crates.CrateSilverfish;
@@ -61,7 +60,6 @@ public class Main extends JavaPlugin {
         CrateTNT c5 = new CrateTNT();
         CrateSilverfish c6 = new CrateSilverfish();
         CratePotion c7 = new CratePotion();
-        CratePartyGiant c8 = new CratePartyGiant(this);
     }
 
     /**
