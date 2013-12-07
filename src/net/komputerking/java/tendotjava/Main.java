@@ -34,6 +34,7 @@ public class Main extends JavaPlugin{
     
     public void dropCrate(){
         if (found){
+        found = false;
         Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.WHITE + " A crate is dropping at the co-ordinates 0, 0!");
         Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.WHITE + " Get there to pick it up.");
         final Location loc = new Location(Bukkit.getWorld("world"), 0, 255 ,0);
