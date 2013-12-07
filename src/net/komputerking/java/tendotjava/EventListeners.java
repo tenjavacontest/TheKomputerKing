@@ -41,8 +41,10 @@ public class EventListeners implements Listener{
             Entity lastIterated = p;
             boolean stillInProg = true;
             while(stillInProg){
-                if (lastIterated.getPassenger() != null && lastIterated != p){
+                if (lastIterated.getPassenger() != null){
+                    if (lastIterated != p){
                     lastIterated.remove();
+                    }
                     lastIterated = lastIterated.getPassenger();
                 } else {
                     stillInProg = false;
