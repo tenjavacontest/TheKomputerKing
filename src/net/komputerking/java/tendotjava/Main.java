@@ -32,7 +32,7 @@ public class Main extends JavaPlugin{
     public void dropCrate(){
         Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.WHITE + " A crate is dropping at the co-ordinates 0, 0!");
         Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.WHITE + " Get there to pick it up.");
-        Location loc = new Location(Bukkit.getWorld("world"), 0, 255 ,0);
+        final Location loc = new Location(Bukkit.getWorld("world"), 0, 255 ,0);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
             public void run(){
               FallingBlock fb = Bukkit.getWorld("world").spawnFallingBlock(loc, Material.PISTON_EXTENSION, (byte) 0x0);
