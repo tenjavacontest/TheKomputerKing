@@ -45,6 +45,7 @@ public class EventListeners implements Listener{
                     } else {
                     lastPassenger.remove();
                     }
+                    lastPassenger.getWorld().createExplosion(lastPassenger.getLocation(), 0);
                     lastPassenger = lastPassenger.getPassenger();
                 }
             }
