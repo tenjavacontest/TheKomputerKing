@@ -24,6 +24,7 @@ public class Main extends JavaPlugin {
     public Location lastChest = null;
     public int countdown = 4 * 60;
     public int count;
+    private static Data data = new Data();
 
     @Override
     public void onEnable() {
@@ -38,6 +39,22 @@ public class Main extends JavaPlugin {
                 dropCrate();
             }
         }, 0L, 10000L);
+    }
+    
+    /**
+     * Gets the instance of the DataManager.
+     * @return Data
+     */
+    public static Data getData(){
+        return data;
+    }
+    
+    /**
+     * Gets the instance of the DataManager non-statically.
+     * @return Data
+     */
+    public Data getDataInst(){
+        return data;
     }
 
     @Override
@@ -89,6 +106,7 @@ public class Main extends JavaPlugin {
                                 fw.setFireworkMeta(fm);
                                 Bukkit.getScheduler().cancelTask(count);
                                 countdown = 4 * 60;
+                                count = 0;
                             }
                             if (countdown == 1) {
                                 FireworkEffect fe = FireworkEffect.builder().withColor(Color.RED).with(FireworkEffect.Type.BALL_LARGE).build();
