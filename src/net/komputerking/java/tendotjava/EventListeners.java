@@ -40,7 +40,7 @@ public class EventListeners implements Listener {
             } else {
                 // Something Not Nice
                 event.getPlayer().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " You have found a bad crate.");
-                int seedOfEntity = rand.nextInt(2);
+                int seedOfEntity = rand.nextInt(3);
                 Bukkit.broadcastMessage("ID: " + seedOfEntity);
                 if (seedOfEntity == 1) {
                     int amount = 0;
@@ -49,10 +49,18 @@ public class EventListeners implements Listener {
                         amount++;
                     }
                 }
-                if (seedOfEntity == 2) {
+                if (seedOfEntity == 0) {
                         TNTPrimed t = (TNTPrimed) event.getClickedBlock().getLocation().getWorld().spawnEntity(event.getClickedBlock().getLocation(), EntityType.PRIMED_TNT);
                         t.setFuseTicks(20);
-                        Bukkit.broadcastMessage("Debug");
+                }
+                if (seedOfEntity == 2){
+                    int amount = 0;
+                    while (amount != 45){
+                    Sheep s = (Sheep) event.getClickedBlock().getLocation().getWorld().spawnEntity(event.getClickedBlock().getLocation(), EntityType.SHEEP);
+                    int colorSeed = rand.nextInt(DyeColor.values().length);
+                    s.setColor(DyeColor.values()[colorSeed]);
+                    amount++;
+                    }
                 }
             }
         }
