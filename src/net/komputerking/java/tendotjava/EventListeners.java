@@ -11,7 +11,9 @@ import org.bukkit.DyeColor;
 import org.bukkit.FireworkEffect;
 import org.bukkit.FireworkEffect.Type;
 import org.bukkit.Material;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -21,6 +23,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 
@@ -37,6 +40,11 @@ public class EventListeners implements Listener {
         this.pl = pl;
     }
 
+    /**
+     * Returns the appropriate FireworkEffect for a crate.
+     * @param good - Whether it is a good crate or bad crate.
+     * @return FireworkEffect
+     */
     public FireworkEffect getFW(boolean good) {
         if (good) {
             FireworkEffect temp = FireworkEffect.builder().withColor(Color.GREEN).with(Type.BALL).build();
@@ -44,6 +52,17 @@ public class EventListeners implements Listener {
         } else {
             FireworkEffect temp = FireworkEffect.builder().withColor(Color.RED).with(Type.CREEPER).build();
             return temp;
+        }
+    }
+    
+    @EventHandler
+    public void onChunkUnload(ChunkUnloadEvent event){
+        for (Entity e : event.getChunk().getEntities()){
+            if (e instanceof FallingBlock){
+                if (((FallingBlock)e).getMetadata("crste").equals(pl.getCrateMeta())){
+                    event.setCancelled(true);
+                }
+            }
         }
     }
 

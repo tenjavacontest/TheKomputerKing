@@ -9,6 +9,8 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.FallingBlock;
+import org.bukkit.metadata.MetadataValue;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -43,14 +45,17 @@ public class Main extends JavaPlugin {
             Random rand = new Random();
             found = false;
             final World w = Bukkit.getWorld("world");
+            if (w.getLoadedChunks() != null){
             int chunkSeed = rand.nextInt(w.getLoadedChunks().length);
             Chunk c = w.getLoadedChunks()[chunkSeed];
+            c.load();
             final Location loc = new Location(w, c.getX(), 255, c.getZ());
             Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.WHITE + " A crate is dropping at the highest point at " + (int) Math.ceil(loc.getX()) + ", " + (int) Math.ceil(loc.getZ()));
             Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.WHITE + " Get there to pick it up.");
             Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
                 public void run() {
                     FallingBlock fb = Bukkit.getWorld("world").spawnFallingBlock(loc, Material.CHEST, (byte) 0x0);
+                    fb.setMetadata("crate", getCrateMeta());
                     lastChest = fb.getLocation().getWorld().getHighestBlockAt(fb.getLocation()).getLocation();
                     lastChest.getBlock().setType(Material.AIR);
                     if (lastChest.getBlock().getRelative(BlockFace.DOWN).getType().equals(Material.AIR)) {
@@ -59,6 +64,70 @@ public class Main extends JavaPlugin {
                 }
             }, 120L);
         }
+        }
+    }
+    
+    /**
+     * Gets the metadata for a FallingSand crate.
+     * @return MetadataValue
+     */
+    public MetadataValue getCrateMeta(){
+        final Plugin pl = this;
+        return new MetadataValue() {
+            @Override
+            public Object value() {
+                return "isCrate";
+            }
+
+            @Override
+            public int asInt() {
+                return 1;
+            }
+
+            @Override
+            public float asFloat() {
+                return 1;
+            }
+
+            @Override
+            public double asDouble() {
+                return 1;
+            }
+
+            @Override
+            public long asLong() {
+                return 1;
+            }
+
+            @Override
+            public short asShort() {
+                return 1;
+            }
+
+            @Override
+            public byte asByte() {
+                return (byte) 0x0;
+            }
+
+            @Override
+            public boolean asBoolean() {
+                return true;
+            }
+
+            @Override
+            public String asString() {
+                return "isCrate";
+            }
+
+            @Override
+            public Plugin getOwningPlugin() {
+                return pl;
+            }
+
+            @Override
+            public void invalidate() {
+            }
+        };
     }
 
 }
