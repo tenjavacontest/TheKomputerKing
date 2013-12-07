@@ -10,7 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin{
     
-    public boolean found = false;
+    public boolean found = true;
     public Location lastChest = null;
    
     @Override
