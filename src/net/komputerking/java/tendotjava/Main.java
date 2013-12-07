@@ -1,6 +1,11 @@
 package net.komputerking.java.tendotjava;
 
 import java.util.Random;
+import net.komputerking.java.tendotjava.crates.CrateBat;
+import net.komputerking.java.tendotjava.crates.CrateDiamond;
+import net.komputerking.java.tendotjava.crates.CrateHorse;
+import net.komputerking.java.tendotjava.crates.CrateSheep;
+import net.komputerking.java.tendotjava.crates.CrateTNT;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
@@ -34,11 +39,23 @@ public class Main extends JavaPlugin {
         System.out.println("Theme - Entitites");
         System.out.println("======================================");
         Bukkit.getPluginManager().registerEvents(new EventListeners(this), this);
+        activateCrates();
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             public void run() {
                 dropCrate();
             }
         }, 0L, 10000L);
+    }
+    
+    /**
+     * Activates the default crates.
+     */
+    public void activateCrates(){
+        CrateHorse c1 = new CrateHorse();
+        CrateDiamond c2 = new CrateDiamond();
+        CrateBat c3 = new CrateBat();
+        CrateSheep c4 = new CrateSheep();
+        CrateTNT c5 = new CrateTNT();
     }
     
     /**
