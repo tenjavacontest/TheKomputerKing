@@ -40,7 +40,11 @@ public class EventListeners implements Listener{
             if (Main.isPlayerInGame(p)){
                 Entity lastPassenger = p.getPassenger();
                 while(p.getPassenger() != null){
+                    if (lastPassenger instanceof Creature){
+                    ((Creature)lastPassenger).setHealth(0.0);
+                    } else {
                     lastPassenger.remove();
+                    }
                     lastPassenger = lastPassenger.getPassenger();
                 }
             }
