@@ -3,11 +3,13 @@ package net.komputerking.java.tendotjava;
 import java.util.Random;
 import net.komputerking.java.tendotjava.crates.CrateBat;
 import net.komputerking.java.tendotjava.crates.CrateDiamond;
+import net.komputerking.java.tendotjava.crates.CrateEXP;
 import net.komputerking.java.tendotjava.crates.CrateHorse;
 import net.komputerking.java.tendotjava.crates.CrateLaunch;
 import net.komputerking.java.tendotjava.crates.CratePotion;
 import net.komputerking.java.tendotjava.crates.CrateSheep;
 import net.komputerking.java.tendotjava.crates.CrateSilverfish;
+import net.komputerking.java.tendotjava.crates.CrateSteak;
 import net.komputerking.java.tendotjava.crates.CrateTNT;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -62,6 +64,8 @@ public class Main extends JavaPlugin {
         CrateSilverfish c6 = new CrateSilverfish();
         CratePotion c7 = new CratePotion();
         CrateLaunch c8 = new CrateLaunch();
+        CrateSteak c9 = new CrateSteak();
+        CrateEXP c10 = new CrateEXP();
     }
 
     /**
@@ -115,10 +119,17 @@ public class Main extends JavaPlugin {
                         }
                     }
                 }, 120L);
+                count = 0;
+                countdown = 4 * 60;
                 count = Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
                     public void run() {
                         countdown--;
                         if (!found) {
+                            if (countdown == -1) {
+                                countdown = 4 * 60;
+                                count = 0;
+                                Bukkit.getScheduler().cancelTask(count);
+                            }
                             if (countdown == 0) {
                                 lastChest.getWorld().createExplosion(lastChest, 0);
                                 lastChest.getBlock().setType(Material.AIR);
@@ -141,7 +152,7 @@ public class Main extends JavaPlugin {
                                 fm.setPower(1);
                                 fw.setFireworkMeta(fm);
                             }
-                            if (countdown < 6 && countdown != 0) {
+                            if (countdown < 6 && countdown > 0) {
                                 Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " The crate will detonate in " + countdown + " seconds.");
                             }
                             if (countdown == 30 || countdown == 60 || countdown == 10) {
