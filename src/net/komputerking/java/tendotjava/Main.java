@@ -128,6 +128,7 @@ public class Main extends JavaPlugin {
                             if (countdown == -1) {
                                 countdown = 4 * 60;
                                 count = 0;
+                                found = true;
                                 Bukkit.getScheduler().cancelTask(count);
                             }
                             if (countdown == 0) {
@@ -142,6 +143,7 @@ public class Main extends JavaPlugin {
                                 fw.setFireworkMeta(fm);
                                 countdown = 4 * 60;
                                 count = 0;
+                                found = true;
                                 Bukkit.getScheduler().cancelTask(count);
                             }
                             if (countdown == 1) {
