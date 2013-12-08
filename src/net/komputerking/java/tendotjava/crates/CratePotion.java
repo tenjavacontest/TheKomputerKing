@@ -15,8 +15,8 @@ public class CratePotion extends Crate {
 
     @Override
     public void onActivate(Location l, Player p) {
-        p.damage(2D);
-        p.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 15, 1));
+        p.damage(2D);/
+        p.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 15*20, 1));
     }
 
 }
