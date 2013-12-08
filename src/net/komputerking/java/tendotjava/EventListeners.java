@@ -96,7 +96,7 @@ public class EventListeners implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEvent event) throws InvocationTargetException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
         if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && event.getClickedBlock().getType().equals(Material.CHEST)){
-            if (event.getClickedBlock() instanceof Chest){
+            if (event.getClickedBlock().getState() instanceof Chest){
                 Chest c = (Chest) event.getClickedBlock().getState();
                 if (c.getInventory().getName().equalsIgnoreCase("crate")){
                     doCrate(true, event.getPlayer(), event.getClickedBlock());
