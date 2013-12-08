@@ -14,7 +14,7 @@ public class CrateLaunch extends Crate {
     
     @Override
     public void onActivate(Location par1, Player par2) {
-        par2.setVelocity(par2.getVelocity().add(new Vector(0, 1, 0)));
+        par2.setVelocity(par2.getVelocity().add(new Vector(0, 2.5, 0)));
     }
     
 }
