@@ -9,6 +9,8 @@ import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.FireworkEffect.Type;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.Chest;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
@@ -57,13 +59,12 @@ public class EventListeners implements Listener {
             }
         }
     }
-
-    @EventHandler
-    public void onClick(PlayerInteractEvent event) throws InvocationTargetException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-        if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && event.getClickedBlock().getLocation().equals(pl.lastChest) && !pl.found) {
+    
+    public void doCrate(boolean force, Player p, Block b) throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException{
+            if (!force){
             pl.found = true;
-            event.setCancelled(true);
-            event.getClickedBlock().setType(Material.AIR);
+            }
+            b.setType(Material.AIR);
             Random rand = new Random();
             boolean good = rand.nextBoolean();
             Crate foundAppropriate = null;
@@ -75,21 +76,36 @@ public class EventListeners implements Listener {
                 }
             }
             if (foundAppropriate != null) {
-                foundAppropriate.onActivate(event.getClickedBlock().getLocation(), event.getPlayer());
-                Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " " + event.getPlayer().getName() + ChatColor.GREEN + " has found a crate.");
-                for (Player p : Bukkit.getOnlinePlayers()) {
-                    if (p != event.getPlayer()) {
-                        p.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " Better luck next time!");
+                foundAppropriate.onActivate(b.getLocation(), p);
+                Bukkit.broadcastMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " " + p.getName() + ChatColor.GREEN + " has found a crate.");
+                for (Player pl : Bukkit.getOnlinePlayers()) {
+                    if (pl != p) {
+                        pl.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " Better luck next time!");
                     }
                 }
                 if (good){
-                    event.getPlayer().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.GREEN + " You found a good crate!");
-                    NMS.doFirework(event.getClickedBlock().getLocation(), getFW(true));
+                    p.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.GREEN + " You found a good crate!");
+                    NMS.doFirework(b.getLocation(), getFW(true));
                 } else {
-                    event.getPlayer().sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " You found a bad crate!");
-                    NMS.doFirework(event.getClickedBlock().getLocation(), getFW(false));
+                    p.sendMessage(ChatColor.GRAY + "[" + ChatColor.GOLD + "EntityCrates" + ChatColor.GRAY + "]" + ChatColor.RED + " You found a bad crate!");
+                    NMS.doFirework(b.getLocation(), getFW(false));
                 }
             }
+    }
+
+    @EventHandler
+    public void onClick(PlayerInteractEvent event) throws InvocationTargetException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+        if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && event.getClickedBlock().getType().equals(Material.CHEST)){
+            if (event.getClickedBlock() instanceof Chest){
+                Chest c = (Chest) event.getClickedBlock();
+                if (c.getInventory().getName().equalsIgnoreCase("crate")){
+                    doCrate(true, event.getPlayer(), event.getClickedBlock());
+                }
+            }
+        }
+        if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && event.getClickedBlock().getLocation().equals(pl.lastChest) && !pl.found) {
+          event.setCancelled(true);
+          doCrate(false, event.getPlayer(), event.getClickedBlock());
         }
     }
 
