@@ -3,6 +3,12 @@ Written for the ten.java plugin competition.
 
 You can download the latest build at: [ci.kompking.info](http://ci.kompking.info/)
 
+## Usage ##
+
+You may run on Bukkit 1.7.2 or 1.6.4, it is not version-dependent.
+
+This plugin will drop crates in loaded chunks once in a while, and announce it in chat. After 4 minutes they explode but if somebody opens them before they self-destruct, either good or bad entities will spawn along with some cool effects.
+
 ## API ##
 Include the plugin jar in your plugins build path, and create a class that extends Crate and uses the following methods:
 
