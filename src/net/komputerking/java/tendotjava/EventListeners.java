@@ -66,7 +66,11 @@ public class EventListeners implements Listener {
             }
             b.setType(Material.AIR);
             Random rand = new Random();
-            boolean good = rand.nextBoolean();
+            boolean good = true;
+            int random = rand.nextInt(4);
+            if (random == 1){
+                good = false;
+            }
             Crate foundAppropriate = null;
             while (foundAppropriate == null) {
                 int crateSeed = rand.nextInt(pl.getDataInst().getCrates().size());
